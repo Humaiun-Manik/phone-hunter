@@ -34,5 +34,38 @@ const displaySearchResult = (phones) => {
 const phoneDetail = (phone) => {
   fetch(`https://openapi.programming-hero.com/api/phone/${phone}`)
     .then((res) => res.json())
-    .then((data) => console.log(data.data));
+    .then((data) => displayPhoneDetail(data.data));
+};
+
+// display phone detail
+const displayPhoneDetail = (phone) => {
+  const phoneInfo = document.getElementById("phone-info");
+  const div = document.createElement("div");
+  div.classList.add("row");
+  div.classList.add("shadow-lg");
+  div.innerHTML = `
+    <div class="col-md-4 p-3">
+        <img src="${phone.image}" class="w-100 rounded-start" alt="..." />
+    </div>
+    <div class="col-md-8">
+        <div class="card-body">
+            <h2 class="card-title">${phone.name}</h2>
+            <h4 class="card-text">${phone.brand}</h4>
+            <h5 class="card-text">${phone.releaseDate ? phone.releaseDate : "No release date found"}</h5>
+            <ul>
+                <li>${phone.mainFeatures.storage}</li>
+                <li>${phone.mainFeatures.displaySize}</li>
+                <li>${phone.mainFeatures.chipSet}</li>
+                <li>${phone.mainFeatures.memory}</li>
+                <li>${phone.others.WLAN}</li>
+                <li>${phone.others.Bluetooth}</li>
+                <li>${phone.others.GPS}</li>
+                <li>${phone.others.NFC}</li>
+                <li>${phone.others.Radio}</li>
+                <li>${phone.others.USB}</li>
+            </ul>
+        </div>
+    </div>
+  `;
+  phoneInfo.appendChild(div);
 };
