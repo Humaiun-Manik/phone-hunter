@@ -3,16 +3,20 @@ document.getElementById("search-btn").addEventListener("click", () => {
   const searchText = searchField.value;
   searchField.value = "";
 
+  document.getElementById("spinner").style.display = "block";
+
   // load all data into search
   fetch(`https://openapi.programming-hero.com/api/phones?search=${searchText}`)
     .then((res) => res.json())
-    .then((data) => displaySearchResult(data.data));
+    .then((data) => displaySearchResult(data.data.slice(0, 20)));
 });
 
 // display search phone
 const displaySearchResult = (phones) => {
   const fiendPhones = document.getElementById("fiend-phones");
+  fiendPhones.textContent = "";
 
+  // display less than 20 phones
   phones.forEach((phone) => {
     const div = document.createElement("div");
     div.classList.add("col");
@@ -28,6 +32,8 @@ const displaySearchResult = (phones) => {
   `;
     fiendPhones.appendChild(div);
   });
+  document.getElementById("spinner").style.display = "none";
+  document.getElementById("showAll-btn").style.display = "block";
 };
 
 // load phone detail data
@@ -40,6 +46,7 @@ const phoneDetail = (phone) => {
 // display phone detail
 const displayPhoneDetail = (phone) => {
   const phoneInfo = document.getElementById("phone-info");
+  phoneInfo.textContent = "";
   const div = document.createElement("div");
   div.classList.add("row");
   div.classList.add("shadow-lg");
@@ -63,6 +70,7 @@ const displayPhoneDetail = (phone) => {
                 <li>${phone.others.NFC}</li>
                 <li>${phone.others.Radio}</li>
                 <li>${phone.others.USB}</li>
+                <li>${phone.mainFeatures.sensors.join(", ")}</li>
             </ul>
         </div>
     </div>

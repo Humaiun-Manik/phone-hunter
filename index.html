@@ -38,10 +38,22 @@
       <div class="container mt-5">
         <div id="phone-info" class="mb-3 mx-auto" style="max-width: 700px"></div>
       </div>
+      <!-- display spinner -->
+      <div id="spinner" class="container text-center" style="display: none">
+        <div class="spinner-border text-success" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
       <!-- display search result -->
       <div class="container mt-5">
         <div id="fiend-phones" class="row row-cols-1 row-cols-md-3 g-5 text-center"></div>
       </div>
+      <div id="showAll-btn" class="text-center" style="display: none">
+        <button type="button" class="btn btn-danger my-5 w-25 py-3 fs-5">Show All</button>
+      </div>
+      <!-- <div class="container" style="display: none">
+        <button type="button" class="btn btn-success" style="display: none">Show All</button>
+      </div> -->
     </main>
     <!-- Bootstrap JavaScript -->
     <script
